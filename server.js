@@ -9,7 +9,7 @@ const database = {
         {
             id: '123',
             name: 'John',
-            email: 'john@gmail.com',
+            email: 'John@gmail.com',
             password: 'cookies',
             entries: 0,
             joined: new Date()
