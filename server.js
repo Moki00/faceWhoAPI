@@ -21,7 +21,7 @@ const database = {
             entries: 0,
             joined: new Date()
         },
-    ]
+    ],
     login: [
         {
             id: '987',
@@ -35,7 +35,13 @@ app.get('/', (req, res) => {
     res.send(database.users);
 })
 
-app.post('/signin', (req,res) => {
+app.post('/signin', (req, res) => {
+    bcrypt.compare("apples", '$2a$10$8Y5f3feUyGPY5wMkbohpy.XxWBcLEvgi5Q/DDCAUDdiq9rG64elOW', function(err, res) {
+        console.log('first guess', res)
+    });
+    bcrypt.compare("vegies", '$2a$10$8Y5f3feUyGPY5wMkbohpy.XxWBcLEvgi5Q/DDCAUDdiq9rG64elOW', function(err, res) {
+        console.log('second guess', res)
+    });
     if (req.body.email === database.users[0].email &&
         req.body.password === database.users[0].password) {
             res.json('success');
@@ -85,18 +91,6 @@ app.post('/image', (req, res) => {
         res.status(400).json('not found');
     }
 })
-
-bcrypt.hash("bacon", null, null, function(err, hash) {
-    // Store hash in your password DB.
-});
-
-// Load hash from your password DB.
-bcrypt.compare("bacon", hash, function(err, res) {
-    // res == true
-});
-bcrypt.compare("veggies", hash, function(err, res) {
-    // res = false
-});
 
 app.listen(3000, ()=> {
     console.log('app is running on port 3000');
