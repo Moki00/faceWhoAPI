@@ -1,15 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
+const cors = require('cors');
 
 const app = express();
-app.use(bodyParser.json());
 
 const database = {
     users: [
         {
             id: '123',
             name: 'John',
+            password: 'cookies',
             email: 'john@gmail.com',
             entries: 0,
             joined: new Date()
@@ -17,6 +18,7 @@ const database = {
         {
             id: '124',
             name: 'silly',
+            password: 'bananas',
             email: 'si11y@gmail.com',
             entries: 0,
             joined: new Date()
@@ -31,19 +33,24 @@ const database = {
     ]
 }
 
+app.use(bodyParser.json());
+app.use(cors())
+
 app.get('/', (req, res) => {
     res.send(database.users);
 })
 
 app.post('/signin', (req, res) => {
-    bcrypt.compare("apples", '$2a$10$8Y5f3feUyGPY5wMkbohpy.XxWBcLEvgi5Q/DDCAUDdiq9rG64elOW', function(err, res) {
-        console.log('first guess', res)
+    bcrypt.compare("apples", '$2a$10$fj2x4AS5uEIQKaF//bFPkeF2BlKyxa5yoROOiJ8gDKvndY/yLg4DS', function(err, res) {
+        console.log('this hash matches', res)
     });
-    bcrypt.compare("vegies", '$2a$10$8Y5f3feUyGPY5wMkbohpy.XxWBcLEvgi5Q/DDCAUDdiq9rG64elOW', function(err, res) {
-        console.log('second guess', res)
-    });
+
+    let match = false
+    bcrypt.compare(req.body.password, database.users[0].password, function(err, res){
+        match=res
+    })
     if (req.body.email === database.users[0].email &&
-        req.body.password === database.users[0].password) {
+        match) {
             res.json('success');
         }   else {
             res.status(400).json('error loging in');
@@ -52,11 +59,17 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
     const { email, name, password } = req.body ;
+    let hashedPassword='';
+    console.log(email)
+    bcrypt.hash(password, null, null, function(err, hash) {
+        console.log(hash);
+        hashedPassword=hash;
+    });
     database.users.push({
         id: '125',
         name: name,
         email: email,
-        password: password,
+        password: hashedPassword,
         entries: 0,
         joined: new Date()
     })
@@ -77,7 +90,7 @@ app.get('/profile/:id', (req, res) => {
     }
 })
 
-app.post('/image', (req, res) => {
+app.put('/image', (req, res) => {
     const {id} = req.body;
     let found = false;
     database.users.forEach(user => {
