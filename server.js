@@ -1,8 +1,5 @@
 
 const databaseCode  = require('./config.js');
-console.log('databaseCode:'+databaseCode);
-console.log(databaseCode );
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
