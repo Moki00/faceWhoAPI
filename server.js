@@ -1,16 +1,20 @@
+
+const databaseCode  = require('./config.js');
+console.log('databaseCode:'+databaseCode);
+console.log(databaseCode );
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
-import dbCode1 from './config.js';
 
 const db = knex({
     client: 'pg',
     connection: {
         host : '127.0.0.1', /* local host */
         user : 'postgres',
-        password : dbCode1,
+        password : databaseCode,
         database : 'facewho'
     }
 });
