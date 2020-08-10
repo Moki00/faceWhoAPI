@@ -1,7 +1,7 @@
 const handleRegister = (req, res, db, bcrypt) => {
   const { email, name, password } = req.body;
   if (!email || !name || !password) {
-    return res.status(400).json('try to register with valid data');
+    return res.status(400).json('must fill in the form to register');
   }
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);

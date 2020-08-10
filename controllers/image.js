@@ -3,7 +3,8 @@ const config  = require('./config.js');
 const { json } = require('body-parser');
 
 const app = new Clarifai.App({
-  apiKey: config.apiKey1
+  apiKey: '8f0cda828a77432c934646605e4b73bd'
+  // apiKey: config.apiKey1
 });
 
 const handleApiCall = (req, res) => {
