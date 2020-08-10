@@ -1,7 +1,7 @@
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).json('try to register with valid data');
+    return res.status(400).json('all fields must be entered');
   }
   db.select('email', 'hash').from('login')
     .where('email', '=', email)

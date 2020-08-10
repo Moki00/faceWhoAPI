@@ -1,4 +1,4 @@
-const databaseCode  = require('./config.js');
+const config = require('./controllers/config.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
@@ -14,21 +14,24 @@ const db = knex({
   connection: {
     host : '127.0.0.1', /* local host */
     user : 'postgres',
-    password : databaseCode,
+    password : config.databaseCode,
     database : 'facewho'
   }
 });
 
 const app = express();
 
+console.log(app)
+
 app.use(bodyParser.json());
 app.use(cors())
 
-app.get('/', (req, res) => { res.send(facewho.users)})
+app.get('/', (req, res) => { res.send(database.users)})
 app.post('/signin', signin.handleSignin(db, bcrypt))
 app.post('/register', (req, res) => {register.handleRegister(req, res, db, bcrypt)})
 app.get('/profile/:id', (req, res) => {profile.handleProfile(req, res, db)})
-app.put('/image', image.handleImage(db))
+app.put('/image', (req, res) => {image.handleImage(req, res, db)})
+app.put('/imageurl', (req, res) => {image.handleApiCall(req, res)})
 
 app.listen(3000, ()=> {
   console.log('app is running on port 3000');
