@@ -1,4 +1,4 @@
-const config = require('./controllers/config.js');
+// const config = require('./controllers/config.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
@@ -14,7 +14,7 @@ const db = knex({
   connection: {
     host : '127.0.0.1', /* local host */
     user : 'postgres',
-    password : config.databaseCode,
+    password : '',
     database : 'facewho'
   }
 });
