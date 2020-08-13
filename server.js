@@ -21,7 +21,7 @@ const db = knex({
 
 const app = express();
 
-console.log(cors)
+// console.log()
 
 app.use(bodyParser.json());
 app.use(cors())
