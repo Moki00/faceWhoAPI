@@ -14,7 +14,9 @@ const db = knex({
   client: 'pg',
   connection: {
     connectionString : process.env.DATABASE_URL,
-    ssl: true,
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 });
 
@@ -42,4 +44,9 @@ app.listen(process.env.PORT || 3000,() => {
 /register --> POST = user
 /profile/:userId --> GET = user
 /image --> PUT --> user count
+
+
+git rm -r --cached node_modules
+git commit -m 'Remove the now ignored directory node_modules'
+
 */
