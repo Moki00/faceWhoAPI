@@ -39,14 +39,10 @@ app.listen(process.env.PORT || 3000,() => {
 });
 
 /*
-/ --> res = this is working
-/ signin --> POST respond with success/fail
-/register --> POST = user
-/profile/:userId --> GET = user
-/image --> PUT --> user count
-
 
 git rm -r --cached node_modules
 git commit -m 'Remove the now ignored directory node_modules'
+
+change API key on Clarifai
 
 */
