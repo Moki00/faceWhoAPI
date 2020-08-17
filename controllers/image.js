@@ -1,7 +1,4 @@
 const Clarifai = require ('clarifai');
-// const config  = require('./config.js');
-const { json } = require('body-parser');
-// var apiKey = process.env.apiKey
 
 const app = new Clarifai.App({
   apiKey: process.env.apiKey
