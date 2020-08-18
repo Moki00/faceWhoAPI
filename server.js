@@ -1,5 +1,3 @@
-// const config = require('./controllers/config.js');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
@@ -22,8 +20,6 @@ const db = knex({
 
 const app = express();
 
-// console.log()
-
 app.use(bodyParser.json());
 app.use(cors())
 
@@ -39,10 +35,5 @@ app.listen(process.env.PORT || 3000,() => {
 });
 
 /*
-
 git rm -r --cached node_modules
-git commit -m 'Remove the now ignored directory node_modules'
-
-change API key on Clarifai
-
 */
