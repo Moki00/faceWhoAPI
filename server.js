@@ -36,4 +36,5 @@ app.listen(process.env.PORT || 3000,() => {
 
 /*
 git rm -r --cached node_modules
+git commit -m 'Remove the now ignored directory node_modules'
 */
